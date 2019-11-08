@@ -3,15 +3,16 @@
 const searchURL = 'https://api.github.com/users/';
 const queryString = '/repos'
 
-function displayResults(responseJson){
+function displayResults(responseJson, username){
     console.log(responseJson);
     $('#results-list').empty();
     let results = responseJson;
     let numresults = results.length;
+    $('#search-repo').append(`<span>${username}</span>`);
     for (let i = 0; i < numresults; i++){
         $('#results-list').append(
            `<li>
-                <a href =${results[i].html_url}><h3>${results[i].name}<h3><a>
+                <a href =${results[i].html_url}><p>${results[i].name}</p><a>
            </li>`
         );
     }
@@ -27,7 +28,7 @@ function getRepo(username){
             }
             throw new Error(response.text);
         })
-        .then(responseJson => displayResults(responseJson))
+        .then(responseJson => displayResults(responseJson, username))
         .catch(err => {
             $('#js-error-message').text(`Something went wrong: ${err.message}`);
         })
