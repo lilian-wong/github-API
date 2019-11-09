@@ -9,6 +9,7 @@ function displayResults(responseJson, username){
     let results = responseJson;
     let numresults = results.length;
     $('#search-repo').append(`<span>${username}</span>`);
+    console.log(username);
     for (let i = 0; i < numresults; i++){
         $('#results-list').append(
            `<li>
